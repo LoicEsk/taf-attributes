@@ -43,29 +43,33 @@ registerBlockType( 'taf/block-taf-attributes', {
 
 	attributes: {
 		imgId: { type: 'number' },
-		imgSrc: { 
-			type: 'string',
-			source: 'attribute',
+		imgAttr: {
+			type: 'array',
+			source: 'query',
 			selector: 'img',
-			attribute: 'src'
-		},
-		imgWidth: {
-			type: 'string',
-			source: 'attribute',
-			selector: 'img',
-			attribute: 'width'
-		 },
-		imgHeight: {
-			type: 'string',
-			source: 'attribute',
-			selector: 'img',
-			attribute: 'height'
-		},
-		imgAlt: { 
-			type: 'string',
-			source: 'attribute',
-			selector: 'img',
-			attribute: 'alt' }
+			query: {
+				url: {
+					type: 'string',
+					source: 'attribute',
+					attribute: 'src'
+				},
+				width: {
+					type: 'string',
+					source: 'attribute',
+					attribute: 'width'
+				},
+				height: {
+					type: 'string',
+					source: 'attribute',
+					attribute: 'height'
+				},
+				alt: {
+					type: 'string',
+					source: 'attribute',
+					attribute: 'alt'
+				}
+			}
+		}
 	},
 
 	/**
@@ -77,15 +81,17 @@ registerBlockType( 'taf/block-taf-attributes', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function( props ) {
-		const { attributes: { imgSrc, imgId }, setAttributes } = props;
+		const { attributes: { imgId, imgAttr: { 0: { url: imgSrc } } } } = props;
 		const setMedia = (media) => {
 			console.log( media.sizes );
 			setAttributes( { 
-				imgSrc: media.sizes.full.url, 
 				imgId: media.id,
-				imgWidth: media.sizes.full.width.toString(),
-				imgHeight: media.sizes.full.height.toString(),
-				imgAlt: media.alt
+				imgAttr: {
+					url: media.sizes.full.url,
+					width: media.sizes.full.width.toString(),
+					height: media.sizes.full.height.toString(),
+					alt: media.alt
+				}
 			} ); 
 		}
 		const contentButton = imgSrc ? (<img src={ imgSrc } />) : "Choix de l'image";
@@ -128,7 +134,8 @@ registerBlockType( 'taf/block-taf-attributes', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: function( props ) {
-		const { attributes: { imgSrc, imgWidth, imgHeight, imgAlt } } = props;
+		const { attributes: { imgAttr: { 0: { url: imgSrc, width: imgWidth, height: imgHeight, alt: imgAlt } } } } = props;
+		console.log(props.attributes);
 		return (
 			<div className="row">
 				<div className="col-md-3 text-center">
