@@ -81,18 +81,20 @@ registerBlockType( 'taf/block-taf-attributes', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function( props ) {
-		const { attributes: { imgId, imgAttr: { 0: { url: imgSrc } } } } = props;
+		const { setAttributes, attributes: { imgId, imgAttr: { 0: { url: imgSrc }} } } = props;
+		console.log(props.attributes);
 		const setMedia = (media) => {
-			console.log( media.sizes );
-			setAttributes( { 
+			setAttributes( {
 				imgId: media.id,
-				imgAttr: {
-					url: media.sizes.full.url,
-					width: media.sizes.full.width.toString(),
-					height: media.sizes.full.height.toString(),
-					alt: media.alt
-				}
-			} ); 
+				imgAttr: [
+					{
+						url: media.sizes.full.url,
+						width: media.sizes.full.width.toString(),
+						height: media.sizes.full.height.toString(),
+						alt: media.alt
+					}
+				]
+			} );
 		}
 		const contentButton = imgSrc ? (<img src={ imgSrc } />) : "Choix de l'image";
 		return (
