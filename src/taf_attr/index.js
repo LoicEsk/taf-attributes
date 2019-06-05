@@ -15,6 +15,8 @@ const { InnerBlocks, MediaUpload, MediaUploadCheck } = wp.editor;
 const { Button } = wp.components;
 const { withState } =  wp.compose;
 
+const ALLOWED_BLOCKS = [ 'core/paragraph' ];
+
 /**
  * Register: aa Gutenberg Block.
  *
@@ -43,14 +45,27 @@ registerBlockType( 'taf/block-taf-attributes', {
 		imgId: { type: 'number' },
 		imgSrc: { 
 			type: 'string',
+			source: 'attribute',
+			selector: 'img',
+			attribute: 'src'
 		},
 		imgWidth: {
-			type: 'number'
+			type: 'string',
+			source: 'attribute',
+			selector: 'img',
+			attribute: 'width'
 		 },
 		imgHeight: {
-			type: 'number'
+			type: 'string',
+			source: 'attribute',
+			selector: 'img',
+			attribute: 'height'
 		},
-		imgAlt: { type: 'string' }
+		imgAlt: { 
+			type: 'string',
+			source: 'attribute',
+			selector: 'img',
+			attribute: 'alt' }
 	},
 
 	/**
@@ -68,8 +83,8 @@ registerBlockType( 'taf/block-taf-attributes', {
 			setAttributes( { 
 				imgSrc: media.sizes.full.url, 
 				imgId: media.id,
-				imgWidth: media.sizes.full.width,
-				imgHeight: media.sizes.full.height,
+				imgWidth: media.sizes.full.width.toString(),
+				imgHeight: media.sizes.full.height.toString(),
 				imgAlt: media.alt
 			} ); 
 		}
@@ -95,7 +110,9 @@ registerBlockType( 'taf/block-taf-attributes', {
 					</MediaUploadCheck>
 				</div>
 				<div className="col-text">
-					<InnerBlocks/>
+					<InnerBlocks
+						allowedBlocks = { ALLOWED_BLOCKS }
+					/>
 				</div>
 			</div>
 		);
