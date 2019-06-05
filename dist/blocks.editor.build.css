@@ -10,10 +10,25 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
-.wp-block-cgb-block-taf-attributes {
-  background: #bada55;
-  border: 0.2rem solid #292929;
-  color: #292929;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem; }
+.wp-block-taf-block-taf-attributes {
+  display: -ms-flexbox;
+  display: flex; }
+  .wp-block-taf-block-taf-attributes .col-img {
+    -ms-flex-preferred-size: 30%;
+        flex-basis: 30%;
+    text-align: center;
+    padding-right: 15px; }
+    .wp-block-taf-block-taf-attributes .col-img img {
+      max-width: 100%;
+      height: auto; }
+  .wp-block-taf-block-taf-attributes .col-text {
+    -ms-flex-preferred-size: 70%;
+        flex-basis: 70%;
+    border-left: 2px solid #363636;
+    padding-left: 15px; }
+  .wp-block-taf-block-taf-attributes .media-button {
+    display: inline-block;
+    background: gray;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white; }

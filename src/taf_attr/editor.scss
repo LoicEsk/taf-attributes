@@ -5,11 +5,30 @@
  * which makes it higher in priority.
  */
 
-.wp-block-cgb-block-taf-attributes  {
-  background: $green;
-  border: 0.2rem solid $black;
-  color: $black;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
+
+ .wp-block-taf-block-taf-attributes {
+  // border: 2px dashed $bleu;
+  display: flex;
+  .col-img {
+    flex-basis: 30%;
+    text-align: center;
+    padding-right: 15px;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .col-text {
+    flex-basis: 70%;
+    border-left: 2px solid #363636;
+    padding-left: 15px;
+
+  }
+  .media-button {
+    display: inline-block;
+    background: gray;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white;
+  }
 }

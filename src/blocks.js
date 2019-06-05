@@ -9,4 +9,4 @@
  * Webpack is compiling as the input file.
  */
 
-import './taff_attr';
+import './taf_attr';
