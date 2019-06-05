@@ -73,6 +73,14 @@ function taf_attributes_cgb_block_assets() { // phpcs:ignore
 			'editor_style'  => 'taf_attributes-cgb-block-editor-css',
 		)
 	);
+
+	// LES METAS
+	register_meta( 'post', 'imgId', array(
+        'show_in_rest' 		=> true,
+		'single' 			=> true,
+		'type' 				=> 'integer',
+		// 'sanitize_callback' => 'intval'
+    ) );
 }
 
 // Hook: Block assets.
